@@ -1,11 +1,18 @@
 import { Todo } from "./todo";
 
-describe("Test Todo", () => {
-  test("Todo is created with default properties", () => {
-    const todo = new Todo("Amber");
+describe("Todo", () => {
+  test("Todo is created with supplied name and default properties", () => {
+    const todo = new Todo("Test todo");
 
-    expect(todo.name).toEqual("Amber");
+    expect(todo.title).toEqual("Test todo");
     expect(todo.isCompleted).toEqual(false);
     expect(todo.id).toEqual(1);
+  });
+
+  test("Todo is updated with new name", () => {
+    const todo = new Todo("Test todo");
+
+    todo.updateTitle("Updated Todo");
+    expect(todo.title).toEqual("Updated Todo");
   });
 });

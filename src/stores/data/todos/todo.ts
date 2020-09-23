@@ -1,4 +1,4 @@
-import { observable } from "mobx";
+import { observable, action } from "mobx";
 
 let id = 1;
 
@@ -6,10 +6,15 @@ export class Todo {
   @observable
   id: number = id++;
   @observable
-  name: string;
+  title: string;
   @observable
   isCompleted: boolean = false;
-  constructor(name: string) {
-    this.name = name;
+  constructor(title: string) {
+    this.title = title;
+  }
+
+  @action
+  updateTitle(title: string): void {
+    this.title = title;
   }
 }
