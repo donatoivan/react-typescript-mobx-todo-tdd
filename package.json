@@ -16,6 +16,8 @@
     "url": "https://github.com/donatoivan/react-typescript-mobx-todo-tdd"
   },
   "dependencies": {
+    "mobx": "^5.15.6",
+    "mobx-react-lite": "^2.2.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0"
   },
