@@ -15,4 +15,20 @@ describe("Todo", () => {
     todo.updateTitle("Updated Todo");
     expect(todo.title).toEqual("Updated Todo");
   });
+
+  test("Todo isCompleted attribute is toggled", () => {
+    const todo = new Todo("Test todo");
+
+    todo.toggleIsCompleted();
+    expect(todo.isCompleted).toEqual(true);
+  });
+
+  test("Todo isCompleted attribute is toggled twice to be treu again", () => {
+    const todo = new Todo("Test todo");
+
+    todo.toggleIsCompleted();
+    todo.toggleIsCompleted();
+
+    expect(todo.isCompleted).toEqual(false);
+  });
 });

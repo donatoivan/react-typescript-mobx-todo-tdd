@@ -17,4 +17,9 @@ export class Todo {
   updateTitle(title: string): void {
     this.title = title;
   }
+
+  @action
+  toggleIsCompleted(): void {
+    this.isCompleted = !this.isCompleted;
+  }
 }
