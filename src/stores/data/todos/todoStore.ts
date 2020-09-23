@@ -14,4 +14,9 @@ export class TodoStore {
   addTodo(title: string) {
     this.list.push(new Todo(title));
   }
+
+  @action
+  getTodo(title: string): Todo {
+    return this.list.find((todo) => todo.title === title) as Todo;
+  }
 }
