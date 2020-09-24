@@ -23,4 +23,12 @@ describe("TodoStore", () => {
 
     expect(gotTodo.title).toEqual("Test");
   });
+
+  test("remove a todo from TodoStore list", () => {
+    testTodoStore.addTodo("Test");
+
+    testTodoStore.removeTodo("Test");
+
+    expect(testTodoStore.list.length).toEqual(0);
+  });
 });

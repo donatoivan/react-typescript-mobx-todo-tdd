@@ -19,4 +19,15 @@ export class TodoStore {
   getTodo(title: string): Todo {
     return this.list.find((todo) => todo.title === title) as Todo;
   }
+
+  @action
+  removeTodo(title: string): void {
+    let todoToDelete: Todo = this.getTodo(title);
+
+    if (todoToDelete) {
+      let index: number = this.list.indexOf(todoToDelete);
+
+      this.list.splice(index, 1);
+    }
+  }
 }
