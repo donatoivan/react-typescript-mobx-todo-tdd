@@ -1,4 +1,5 @@
 import { observable, action } from "mobx";
+import { TodoStore } from "./todoStore";
 
 let id = 1;
 
@@ -9,10 +10,15 @@ export class Todo {
   title: string;
   @observable
   isCompleted: boolean = false;
+  @observable
   userId: number;
-  constructor(title: string, userId: number) {
+
+  private todoStore: TodoStore;
+
+  constructor(title: string, userId: number, todoStore: TodoStore) {
     this.title = title;
     this.userId = userId;
+    this.todoStore = todoStore;
   }
 
   @action
@@ -23,5 +29,10 @@ export class Todo {
   @action
   toggleIsCompleted(): void {
     this.isCompleted = !this.isCompleted;
+  }
+
+  @action
+  remove() {
+    this.todoStore.removeTodo(this.title);
   }
 }

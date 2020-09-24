@@ -12,10 +12,9 @@ export class TodoStore {
 
   @action
   addTodo(title: string, userId: number) {
-    this.list.push(new Todo(title, userId));
+    this.list.push(new Todo(title, userId, this));
   }
 
-  @action
   getTodo(title: string): Todo {
     return this.list.find((todo) => todo.title === title) as Todo;
   }
