@@ -1,6 +1,6 @@
 import { RootStore } from "../../rootStore";
 import { Todo } from "./todo";
-import { action } from "mobx";
+import { action, computed } from "mobx";
 
 export class TodoStore {
   list: Todo[] = [];
@@ -29,5 +29,15 @@ export class TodoStore {
 
       this.list.splice(index, 1);
     }
+  }
+
+  @computed
+  get incompleteTodos(): Todo[] {
+    return this.list.filter((todo) => todo.isCompleted === false);
+  }
+
+  @computed
+  get completedTodos(): Todo[] {
+    return this.list.filter((todo) => todo.isCompleted === true);
   }
 }

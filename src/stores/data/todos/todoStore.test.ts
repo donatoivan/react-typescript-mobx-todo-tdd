@@ -31,4 +31,19 @@ describe("TodoStore", () => {
 
     expect(testTodoStore.list.length).toEqual(0);
   });
+
+  test("get list of incomplete todos from TodoStore list", () => {
+    testTodoStore.addTodo("Test");
+
+    expect(testTodoStore.incompleteTodos.length).toEqual(1);
+  });
+
+  test("get list of complete todos from TodoStore list", () => {
+    testTodoStore.addTodo("Test");
+    let todo: Todo = testTodoStore.getTodo("Test");
+
+    todo.toggleIsCompleted();
+
+    expect(testTodoStore.completedTodos.length).toEqual(1);
+  });
 });
