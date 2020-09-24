@@ -11,8 +11,8 @@ export class TodoStore {
   }
 
   @action
-  addTodo(title: string) {
-    this.list.push(new Todo(title));
+  addTodo(title: string, userId: number) {
+    this.list.push(new Todo(title, userId));
   }
 
   @action

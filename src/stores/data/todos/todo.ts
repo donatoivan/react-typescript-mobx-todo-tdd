@@ -9,8 +9,10 @@ export class Todo {
   title: string;
   @observable
   isCompleted: boolean = false;
-  constructor(title: string) {
+  userId: number;
+  constructor(title: string, userId: number) {
     this.title = title;
+    this.userId = userId;
   }
 
   @action

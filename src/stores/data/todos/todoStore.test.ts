@@ -11,13 +11,13 @@ describe("TodoStore", () => {
   });
 
   test("add a todo to TodoStore list", () => {
-    testTodoStore.addTodo("Test");
+    testTodoStore.addTodo("Test", 1);
 
     expect(testTodoStore.list.length).toEqual(1);
   });
 
   test("get a todo from TodoStore list", () => {
-    testTodoStore.addTodo("Test");
+    testTodoStore.addTodo("Test", 1);
 
     let gotTodo: Todo = testTodoStore.getTodo("Test");
 
@@ -25,7 +25,7 @@ describe("TodoStore", () => {
   });
 
   test("remove a todo from TodoStore list", () => {
-    testTodoStore.addTodo("Test");
+    testTodoStore.addTodo("Test", 1);
 
     testTodoStore.removeTodo("Test");
 
@@ -33,13 +33,13 @@ describe("TodoStore", () => {
   });
 
   test("get list of incomplete todos from TodoStore list", () => {
-    testTodoStore.addTodo("Test");
+    testTodoStore.addTodo("Test", 1);
 
     expect(testTodoStore.incompleteTodos.length).toEqual(1);
   });
 
   test("get list of complete todos from TodoStore list", () => {
-    testTodoStore.addTodo("Test");
+    testTodoStore.addTodo("Test", 1);
     let todo: Todo = testTodoStore.getTodo("Test");
 
     todo.toggleIsCompleted();

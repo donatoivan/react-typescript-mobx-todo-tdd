@@ -7,10 +7,12 @@ export class UserStore {
   // @ts-ignore
   private readonly rootStore: RootStore;
 
-  constructor(rootStore: RootStore) {}
+  constructor(rootStore: RootStore) {
+    this.rootStore = rootStore;
+  }
 
   @action
   addUser(name: string) {
-    this.list.push(new User(name));
+    this.list.push(new User(name, this.rootStore));
   }
 }
