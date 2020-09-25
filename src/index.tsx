@@ -2,12 +2,18 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import App from "./components/App";
 
-import { StoresProvider, stores } from "./stores/helpers/stores";
+import { StoreProvider } from "./stores/helpers/storeContext";
+import { createStore } from "./stores/helpers/createStores";
 
+const store = createStore();
+
+store.dataStore.todoStore.addTodo("hey", 1);
+store.dataStore.todoStore.addTodo("ho", 1);
+store.dataStore.todoStore.addTodo("hee", 1);
 ReactDOM.render(
-  <StoresProvider value={stores}>
+  <StoreProvider value={store}>
     <App />
-  </StoresProvider>,
+  </StoreProvider>,
 
   document.getElementById("app")
 );
@@ -22,6 +28,8 @@ declare let module: { hot: any };
 
 if (module.hot) {
   module.hot.accept("./components/App", () => {
-    ReactDOM.render(<div>Hey</div>, document.getElementById("app"));
+    const NewApp = require("./components/App").default;
+
+    ReactDOM.render(<NewApp />, document.getElementById("app"));
   });
 }

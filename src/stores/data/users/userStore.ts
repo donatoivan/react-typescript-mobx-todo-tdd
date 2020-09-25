@@ -4,7 +4,6 @@ import { action } from "mobx";
 
 export class UserStore {
   list: User[] = [];
-  // @ts-ignore
   private readonly rootStore: RootStore;
 
   constructor(rootStore: RootStore) {
@@ -12,23 +11,23 @@ export class UserStore {
   }
 
   @action
-  addUser(name: string) {
+  addUser(name: string): void {
     this.list.push(new User(name, this.rootStore));
   }
 
   @action
-  getUser(name: string) {
+  getUser(name: string): User {
     return this.list.find((user) => user.name === name) as User;
   }
 
   @action
-  removeUser(name: string) {
-    let user = this.getUser(name);
+  removeUser(name: string): void {
+    const user = this.getUser(name);
 
     if (user) {
       user.userTodos.forEach((todo) => todo.remove());
 
-      let index: number = this.list.indexOf(user);
+      const index: number = this.list.indexOf(user);
 
       this.list.splice(index, 1);
     }

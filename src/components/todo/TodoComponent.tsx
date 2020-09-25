@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+import { Todo } from "../../stores/data/todos/todo";
 
-const Todo: React.FunctionComponent = () => {
+interface Props {
+  todo: Todo;
+}
+
+const TodoComponent: React.FunctionComponent<Props> = ({ todo }) => {
   const [editMode, setEditMode] = useState(false);
   const [text, setText] = useState("");
   return (
-    <div data-testid="todo">
-      <div>Todo</div>
+    <div data-testid="todo" key={todo.id}>
       {editMode ? (
         <input
           data-testid="edit-input"
@@ -13,7 +17,7 @@ const Todo: React.FunctionComponent = () => {
           onChange={(e) => setText(e.target.value)}
         />
       ) : (
-        <div></div>
+        <div>{todo.title}</div>
       )}
       {editMode ? (
         <button type="button" onClick={() => setEditMode(false)}>
@@ -30,4 +34,4 @@ const Todo: React.FunctionComponent = () => {
   );
 };
 
-export default Todo;
+export default TodoComponent;

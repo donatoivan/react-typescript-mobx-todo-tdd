@@ -2,22 +2,41 @@ import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import "@testing-library/jest-dom/extend-expect";
-
-import Todo from "./Todo";
+import { StoreContext } from "../../stores/helpers/storeContext";
+import TodoComponent from "./TodoComponent";
+import { Todo } from "../../stores/data/todos/todo";
+import { TodoStore } from "../../stores/data/todos/todoStore";
+import { RootStore } from "../../stores/rootStore";
 
 afterEach(cleanup);
 
+const renderStore = (rootStore: RootStore, todo: Todo) => {
+  return render(
+    <StoreContext.Provider value={rootStore}>
+      <TodoComponent todo={todo} key={1} />
+    </StoreContext.Provider>
+  );
+};
+
 describe("<Todo />", () => {
+  let todo: Todo;
+  let todoStore: TodoStore;
+  let rootStore: RootStore;
+  beforeEach(() => {
+    rootStore = new RootStore();
+    todoStore = new TodoStore(rootStore);
+    todo = new Todo("Test", 1, todoStore);
+  });
   test("component renders Todo", () => {
-    const { getByTestId } = render(<Todo />);
+    const { getByText } = renderStore(rootStore, todo);
 
-    const todo: HTMLElement = getByTestId("todo");
+    const todoEl: HTMLElement = getByText("Test");
 
-    expect(todo);
+    expect(todoEl);
   });
 
   test("edit, remove and toggles buttons are rendered", () => {
-    const { getByText } = render(<Todo />);
+    const { getByText } = renderStore(rootStore, todo);
 
     const editButton: HTMLElement = getByText("Edit");
     const removeButton: HTMLElement = getByText("Remove");
@@ -29,8 +48,7 @@ describe("<Todo />", () => {
   });
 
   test("input box and save button appear once edit button is clicked", () => {
-    const { getByText, getByTestId } = render(<Todo />);
-
+    const { getByText, getByTestId } = renderStore(rootStore, todo);
     fireEvent.click(getByText("Edit"));
 
     expect(getByText("Save")).toHaveTextContent("Save");
@@ -38,7 +56,7 @@ describe("<Todo />", () => {
   });
 
   test("input box and save button disappear once save button is clicked", () => {
-    const { queryByText, getByText } = render(<Todo />);
+    const { queryByText, getByText } = renderStore(rootStore, todo);
 
     fireEvent.click(getByText("Edit"));
     fireEvent.click(getByText("Save"));
@@ -48,7 +66,7 @@ describe("<Todo />", () => {
   });
 
   test("input is registered in input box when in edit mode", () => {
-    const { getByTestId, getByText } = render(<Todo />);
+    const { getByTestId, getByText } = renderStore(rootStore, todo);
 
     fireEvent.click(getByText("Edit"));
 

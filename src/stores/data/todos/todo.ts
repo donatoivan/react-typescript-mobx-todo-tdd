@@ -9,7 +9,7 @@ export class Todo {
   @observable
   title: string;
   @observable
-  isCompleted: boolean = false;
+  isCompleted = false;
   @observable
   userId: number;
 
@@ -32,7 +32,7 @@ export class Todo {
   }
 
   @action
-  remove() {
+  remove(): void {
     this.todoStore.removeTodo(this.title);
   }
 }

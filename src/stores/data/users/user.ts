@@ -1,13 +1,14 @@
 import { computed, observable } from "mobx";
 import { RootStore } from "../../rootStore";
+import { Todo } from "../todos/todo";
 
-let runningId: number = 1;
+let runningId = 1;
 export class User {
   @observable
   name: string;
 
   @observable
-  userId: number = runningId++;
+  userId = runningId++;
 
   private rootStore: RootStore;
 
@@ -17,7 +18,7 @@ export class User {
   }
 
   @computed
-  get userTodos() {
+  get userTodos(): Todo[] {
     return this.rootStore.dataStore.todoStore.list.filter(
       (todo) => todo.userId === this.userId
     );
