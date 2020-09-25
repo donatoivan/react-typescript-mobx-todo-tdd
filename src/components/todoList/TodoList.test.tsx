@@ -2,14 +2,14 @@ import React from "react";
 import { render, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 
-import App from "./App";
+import TodoList from "./TodoList";
 
 afterEach(cleanup);
 
-describe("<App />", () => {
+describe("<Todolist />", () => {
   test("component renders Todo", () => {
-    const { queryByText } = render(<App />);
+    const { queryByTestId } = render(<TodoList />);
 
-    expect(queryByText("Todo")).toBeInTheDocument();
+    expect(queryByTestId("todo")).toBeInTheDocument();
   });
 });

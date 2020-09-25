@@ -1,7 +1,9 @@
 import React from "react";
 
+import Todo from "../todo/Todo";
+
 const TodoList: React.FunctionComponent = () => {
-  return <div>Todos</div>;
+  return <Todo />;
 };
 
 export default TodoList;
