@@ -4,13 +4,15 @@ import { useObserver } from "mobx-react-lite";
 import TodoComponent from "../todo/TodoComponent";
 
 const TodoList: React.FunctionComponent = () => {
-  const rootStore = useStore();
+  const {
+    dataStore: { todoStore },
+  } = useStore();
 
   return useObserver(() => {
     return (
       <div>
         <h1>Todos</h1>
-        {rootStore.dataStore.todoStore.list.map((todo) => {
+        {todoStore.list.map((todo) => {
           return <TodoComponent todo={todo} key={todo.id} />;
         })}
       </div>
