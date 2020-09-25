@@ -2,8 +2,12 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import App from "./components/App";
 
+import { StoresProvider, stores } from "./stores/helpers/stores";
+
 ReactDOM.render(
-  <App />,
+  <StoresProvider value={stores}>
+    <App />
+  </StoresProvider>,
 
   document.getElementById("app")
 );
