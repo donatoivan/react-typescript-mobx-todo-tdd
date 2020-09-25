@@ -11,7 +11,7 @@ describe("<Todo />", () => {
   test("component renders Todo", () => {
     const { getByTestId } = render(<Todo />);
 
-    const todo = getByTestId("todo");
+    const todo: HTMLElement = getByTestId("todo");
 
     expect(todo);
   });
@@ -19,9 +19,9 @@ describe("<Todo />", () => {
   test("edit, remove and toggles buttons are rendered", () => {
     const { getByText } = render(<Todo />);
 
-    const editButton = getByText("Edit");
-    const removeButton = getByText("Remove");
-    const toggleButton = getByText("Toggle");
+    const editButton: HTMLElement = getByText("Edit");
+    const removeButton: HTMLElement = getByText("Remove");
+    const toggleButton: HTMLElement = getByText("Toggle");
 
     expect(editButton.textContent).toEqual("Edit");
     expect(removeButton.textContent).toEqual("Remove");
@@ -43,7 +43,7 @@ describe("<Todo />", () => {
     fireEvent.click(getByText("Edit"));
     fireEvent.click(getByText("Save"));
 
-    const saveButton = queryByText("Save");
+    const saveButton: HTMLElement | null = queryByText("Save");
     expect(saveButton).not.toBeInTheDocument();
   });
 
