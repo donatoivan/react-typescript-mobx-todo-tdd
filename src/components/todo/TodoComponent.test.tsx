@@ -73,4 +73,14 @@ describe("<Todo />", () => {
     userEvent.type(getByTestId("edit-input"), "User typed something");
     expect(getByTestId("edit-input")).toHaveValue("User typed something");
   });
+
+  test("Todo title is updated after save button is clicked", () => {
+    const { getByTestId, getByText } = renderStore(rootStore, todo);
+
+    fireEvent.click(getByText("Edit"));
+    userEvent.type(getByTestId("edit-input"), "User typed something");
+    fireEvent.click(getByText("Save"));
+
+    expect(getByTestId("todo-title")).toHaveTextContent("User typed something");
+  });
 });
