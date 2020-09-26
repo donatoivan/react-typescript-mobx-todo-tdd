@@ -1,9 +1,11 @@
 import { RootStore } from "../../rootStore";
 import { Todo } from "./todo";
-import { action, computed } from "mobx";
+import { action, computed, observable } from "mobx";
 
 export class TodoStore {
+  @observable
   list: Todo[] = [];
+  /* eslint-disable @typescript-eslint/ban-ts-comment*/
   // @ts-ignore
   private rootStore: RootStore;
   constructor(rootStore: RootStore) {
@@ -11,7 +13,7 @@ export class TodoStore {
   }
 
   @action
-  addTodo(title: string, userId: number) {
+  addTodo(title: string, userId: number): void {
     this.list.push(new Todo(title, userId, this));
   }
 
@@ -21,10 +23,10 @@ export class TodoStore {
 
   @action
   removeTodo(title: string): void {
-    let todoToDelete: Todo = this.getTodo(title);
+    const todoToDelete: Todo = this.getTodo(title);
 
     if (todoToDelete) {
-      let index: number = this.list.indexOf(todoToDelete);
+      const index: number = this.list.indexOf(todoToDelete);
 
       this.list.splice(index, 1);
     }

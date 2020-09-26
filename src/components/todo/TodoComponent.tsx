@@ -37,7 +37,14 @@ const TodoComponent: React.FunctionComponent<Props> = ({ todo }) => {
             Edit
           </button>
         )}
-        <button type="button">Remove</button>
+        <button
+          type="button"
+          onClick={() => {
+            todo.remove();
+          }}
+        >
+          Remove
+        </button>
         <button type="button">Toggle</button>
       </div>
     );

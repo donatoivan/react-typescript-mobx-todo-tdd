@@ -31,7 +31,6 @@ export class Todo {
     this.isCompleted = !this.isCompleted;
   }
 
-  @action
   remove(): void {
     this.todoStore.removeTodo(this.title);
   }

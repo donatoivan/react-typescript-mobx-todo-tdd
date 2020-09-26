@@ -1,5 +1,5 @@
 import React from "react";
-import { render, cleanup } from "@testing-library/react";
+import { render, cleanup, fireEvent } from "@testing-library/react";
 import { RootStore } from "../../stores/rootStore";
 
 import { StoreContext } from "../../stores/helpers/storeContext";
@@ -10,30 +10,38 @@ import TodoList from "./TodoList";
 
 afterEach(cleanup);
 
+const renderStore = (rootStore: RootStore) => {
+  return render(
+    <StoreContext.Provider value={rootStore}>
+      <TodoList />
+    </StoreContext.Provider>
+  );
+};
+
 describe("<Todolist />", () => {
-  // test("component renders Todo", () => {
-  //   const { queryByTestId } = render(<TodoList />);
+  let rootStore: RootStore;
 
-  //   expect(queryByTestId("todo")).toBeInTheDocument();
-  // });
-
-  it("it renders without error", () => {
-    expect(
-      render(
-        <StoreContext.Provider value={new RootStore()}>
-          <TodoList />
-        </StoreContext.Provider>
-      )
-    ).toBeTruthy();
+  beforeEach(() => {
+    rootStore = new RootStore();
   });
 
-  //   it("it renders initial counter value different from 0", () => {
-  //     const store = stubRootStore();
-  //     store.dataStore.todoStore.addTodo("Test", 1);
-  //     useStore.mockReturnValue(store);
+  test("it renders without error", () => {
+    expect(renderStore(rootStore)).toBeTruthy();
+  });
 
-  //     const { queryByText } = render(<TodoList />);
+  test("component renders Todo", () => {
+    rootStore.dataStore.todoStore.addTodo("Test", 1);
+    const { queryByTestId } = renderStore(rootStore);
 
-  //     expect(queryByText("Test")).toBeTruthy();
-  //   });
+    expect(queryByTestId("todo-title")).toBeInTheDocument();
+  });
+
+  test("Todo is deleted after remove button is clicked", async () => {
+    rootStore.dataStore.todoStore.addTodo("Test", 1);
+    const { queryByText, getByText } = renderStore(rootStore);
+
+    fireEvent.click(getByText("Remove"));
+
+    expect(queryByText("Test")).not.toBeInTheDocument();
+  });
 });

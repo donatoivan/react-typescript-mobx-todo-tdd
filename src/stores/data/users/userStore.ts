@@ -1,8 +1,9 @@
 import { RootStore } from "../../rootStore";
 import { User } from "./user";
-import { action } from "mobx";
+import { action, observable } from "mobx";
 
 export class UserStore {
+  @observable
   list: User[] = [];
   private readonly rootStore: RootStore;
 

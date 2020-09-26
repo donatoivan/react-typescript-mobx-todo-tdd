@@ -41,4 +41,12 @@ describe("Todo", () => {
 
     expect(todo.isCompleted).toEqual(false);
   });
+
+  test("Todo is removed", () => {
+    const todo = new Todo("Test todo", 1, testTodoStore);
+
+    todo.remove();
+
+    expect(testTodoStore.list.length).toEqual(0);
+  });
 });
