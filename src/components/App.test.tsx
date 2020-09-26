@@ -1,5 +1,5 @@
 import React from "react";
-import { render, cleanup } from "@testing-library/react";
+import { render, cleanup, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import App from "./App";
 import { StoreContext } from "../stores/helpers/storeContext";
@@ -20,5 +20,17 @@ describe("<App />", () => {
     );
 
     expect(getByText("Todos")).toBeInTheDocument();
+  });
+
+  test("component renders Users", () => {
+    const { getByText } = render(
+      <StoreContext.Provider value={rootStore}>
+        <App />
+      </StoreContext.Provider>
+    );
+
+    fireEvent.click(getByText("Users List"));
+
+    expect(getByText("Users")).toBeInTheDocument();
   });
 });

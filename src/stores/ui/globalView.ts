@@ -1,5 +1,5 @@
 import { RootStore } from "../rootStore";
-import { action } from "mobx";
+import { action, observable } from "mobx";
 
 export enum Views {
   Todos,
@@ -7,6 +7,7 @@ export enum Views {
 }
 
 export class GlobalView {
+  @observable
   currentView: Views = Views.Todos;
   constructor(rootStore: RootStore) {}
 
