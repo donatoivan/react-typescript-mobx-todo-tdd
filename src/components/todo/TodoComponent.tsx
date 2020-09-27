@@ -20,7 +20,12 @@ const TodoComponent: React.FunctionComponent<Props> = ({ todo }) => {
             onChange={(e) => setText(e.target.value)}
           />
         ) : (
-          <div data-testid="todo-title">{todo.title}</div>
+          <div>
+            <h1 data-testid="todo-title">{todo.title}</h1>
+            <p data-testid="completed">
+              Completed: {todo.isCompleted.toString()}
+            </p>
+          </div>
         )}
         {editMode ? (
           <button
@@ -45,7 +50,9 @@ const TodoComponent: React.FunctionComponent<Props> = ({ todo }) => {
         >
           Remove
         </button>
-        <button type="button">Toggle</button>
+        <button type="button" onClick={() => todo.toggleIsCompleted()}>
+          Toggle Completed
+        </button>
       </div>
     );
   });

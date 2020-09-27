@@ -4,7 +4,7 @@ import { useStore } from "../stores/helpers/useStore";
 import { Views } from "../stores/ui/globalView";
 
 import TodoList from "./todoList/TodoList";
-import UserList from "./user/UserList";
+import UserList from "./userList/UserList";
 
 const App: React.FunctionComponent = () => {
   const {

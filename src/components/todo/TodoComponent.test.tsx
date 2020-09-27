@@ -40,11 +40,25 @@ describe("<Todo />", () => {
 
     const editButton: HTMLElement = getByText("Edit");
     const removeButton: HTMLElement = getByText("Remove");
-    const toggleButton: HTMLElement = getByText("Toggle");
+    const toggleButton: HTMLElement = getByText("Toggle Completed");
 
     expect(editButton.textContent).toEqual("Edit");
     expect(removeButton.textContent).toEqual("Remove");
-    expect(toggleButton.textContent).toEqual("Toggle");
+    expect(toggleButton.textContent).toEqual("Toggle Completed");
+  });
+
+  test("todo completed attribute is rendered", () => {
+    const { getByTestId } = renderStore(rootStore, todo);
+
+    expect(getByTestId("completed")).toHaveTextContent("Completed: false");
+  });
+
+  test("todo completed attribute is toggled from false to true", () => {
+    const { getByTestId, getByText } = renderStore(rootStore, todo);
+
+    fireEvent.click(getByText("Toggle Completed"));
+
+    expect(getByTestId("completed")).toHaveTextContent("Completed: true");
   });
 
   test("input box and save button appear once edit button is clicked", () => {
