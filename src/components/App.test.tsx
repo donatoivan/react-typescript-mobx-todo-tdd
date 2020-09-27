@@ -12,14 +12,14 @@ describe("<App />", () => {
   beforeEach(() => {
     rootStore = new RootStore();
   });
-  test("component renders Todo", () => {
+  test("component renders incomplete Todo list", () => {
     const { getByText } = render(
       <StoreContext.Provider value={rootStore}>
         <App />
       </StoreContext.Provider>
     );
 
-    expect(getByText("Todos")).toBeInTheDocument();
+    expect(getByText("Incomplete Todos (0)")).toBeInTheDocument();
   });
 
   test("component renders Users", () => {

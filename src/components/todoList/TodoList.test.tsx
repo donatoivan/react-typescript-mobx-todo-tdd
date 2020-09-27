@@ -36,6 +36,21 @@ describe("<Todolist />", () => {
     expect(queryByTestId("todo-title")).toBeInTheDocument();
   });
 
+  test("component renders an incomplete todo List", () => {
+    rootStore.dataStore.todoStore.addTodo("Test", 1);
+    const { queryByText } = renderStore(rootStore);
+
+    expect(queryByText("Incomplete Todos (1)")).toBeInTheDocument();
+  });
+
+  test("component renders a complete todo List", () => {
+    rootStore.dataStore.todoStore.addTodo("Test", 1);
+    rootStore.dataStore.todoStore.getTodo(3).toggleIsCompleted();
+    const { queryByText } = renderStore(rootStore);
+
+    expect(queryByText("Complete Todos (1)")).toBeInTheDocument();
+  });
+
   test("Todo is deleted after remove button is clicked", async () => {
     rootStore.dataStore.todoStore.addTodo("Test", 1);
     const { queryByText, getByText } = renderStore(rootStore);

@@ -8,39 +8,31 @@ describe("TodoStore", () => {
 
   beforeEach(() => {
     testTodoStore = new TodoStore(testRootStore);
+    testTodoStore.addTodo("Test", 1);
   });
 
   test("add a todo to TodoStore list", () => {
-    testTodoStore.addTodo("Test", 1);
-
     expect(testTodoStore.list.length).toEqual(1);
   });
 
   test("get a todo from TodoStore list", () => {
-    testTodoStore.addTodo("Test", 1);
-
-    let gotTodo: Todo = testTodoStore.getTodo("Test");
+    let gotTodo: Todo = testTodoStore.getTodo(2);
 
     expect(gotTodo.title).toEqual("Test");
   });
 
   test("remove a todo from TodoStore list", () => {
-    testTodoStore.addTodo("Test", 1);
-
-    testTodoStore.removeTodo("Test");
+    testTodoStore.removeTodo(3);
 
     expect(testTodoStore.list.length).toEqual(0);
   });
 
   test("get list of incomplete todos from TodoStore list", () => {
-    testTodoStore.addTodo("Test", 1);
-
     expect(testTodoStore.incompleteTodos.length).toEqual(1);
   });
 
   test("get list of complete todos from TodoStore list", () => {
-    testTodoStore.addTodo("Test", 1);
-    let todo: Todo = testTodoStore.getTodo("Test");
+    let todo: Todo = testTodoStore.getTodo(5);
 
     todo.toggleIsCompleted();
 

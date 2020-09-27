@@ -11,10 +11,18 @@ const TodoList: React.FunctionComponent = () => {
   return useObserver(() => {
     return (
       <div>
-        <h1>Todos</h1>
-        {todoStore.list.map((todo) => {
-          return <TodoComponent todo={todo} key={todo.id} />;
-        })}
+        <div>
+          <h1>Incomplete Todos ({todoStore.incompleteTodos.length})</h1>
+          {todoStore.incompleteTodos.map((todo) => {
+            return <TodoComponent todo={todo} key={todo.id} />;
+          })}
+        </div>
+        <div>
+          <h1>Complete Todos ({todoStore.completedTodos.length})</h1>
+          {todoStore.completedTodos.map((todo) => {
+            return <TodoComponent todo={todo} key={todo.id} />;
+          })}
+        </div>
       </div>
     );
   });

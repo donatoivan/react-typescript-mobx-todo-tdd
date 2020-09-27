@@ -17,13 +17,13 @@ export class TodoStore {
     this.list.push(new Todo(title, userId, this));
   }
 
-  getTodo(title: string): Todo {
-    return this.list.find((todo) => todo.title === title) as Todo;
+  getTodo(id: number): Todo {
+    return this.list.find((todo) => todo.id === id) as Todo;
   }
 
   @action
-  removeTodo(title: string): void {
-    const todoToDelete: Todo = this.getTodo(title);
+  removeTodo(id: number): void {
+    const todoToDelete: Todo = this.getTodo(id);
 
     if (todoToDelete) {
       const index: number = this.list.indexOf(todoToDelete);

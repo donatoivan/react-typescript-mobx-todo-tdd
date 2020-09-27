@@ -32,6 +32,6 @@ export class Todo {
   }
 
   remove(): void {
-    this.todoStore.removeTodo(this.title);
+    this.todoStore.removeTodo(this.id);
   }
 }
