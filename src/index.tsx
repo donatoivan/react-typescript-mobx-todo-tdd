@@ -10,6 +10,7 @@ const store = createStore();
 store.dataStore.todoStore.addTodo("hey", 1);
 store.dataStore.todoStore.addTodo("ho", 1);
 store.dataStore.todoStore.addTodo("hee", 1);
+store.dataStore.todoStore.addTodo("hee2", 2);
 store.dataStore.userStore.addUser("User 1");
 store.dataStore.userStore.addUser("User 2");
 ReactDOM.render(

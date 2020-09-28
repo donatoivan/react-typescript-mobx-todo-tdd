@@ -20,18 +20,18 @@ describe("UserStore", () => {
   test("get a User", () => {
     testUserStore.addUser("User");
 
-    let user: User = testUserStore.getUser("User");
+    let user: User = testUserStore.getUser(2);
 
     expect(user.name).toEqual("User");
   });
 
   test("remove a User", () => {
     testUserStore.addUser("User");
-    let user: User = testUserStore.getUser("User");
+    let user: User = testUserStore.getUser(3);
 
     if (user) {
       testRootStore.dataStore.todoStore.addTodo("Test", user.userId);
-      testUserStore.removeUser("User");
+      testUserStore.removeUser(user.userId);
 
       expect(testUserStore.list.length).toEqual(0);
     }

@@ -17,13 +17,13 @@ export class UserStore {
   }
 
   @action
-  getUser(name: string): User {
-    return this.list.find((user) => user.name === name) as User;
+  getUser(id: number): User {
+    return this.list.find((user) => user.userId === id) as User;
   }
 
   @action
-  removeUser(name: string): void {
-    const user = this.getUser(name);
+  removeUser(id: number): void {
+    const user = this.getUser(id);
 
     if (user) {
       user.userTodos.forEach((todo) => todo.remove());

@@ -1,7 +1,7 @@
 import React from "react";
 import { useStore } from "../../stores/helpers/useStore";
 
-import UserComponent from "./UserComponent";
+import UserComponent from "../user/UserComponent";
 
 const UserList = (): JSX.Element => {
   const {
