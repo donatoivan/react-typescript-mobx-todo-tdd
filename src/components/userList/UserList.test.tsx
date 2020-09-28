@@ -1,9 +1,9 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+
 import { RootStore } from "../../stores/rootStore";
-
 import { StoreContext } from "../../stores/helpers/storeContext";
-
 import "@testing-library/jest-dom/extend-expect";
 
 import UserList from "./UserList";
@@ -16,7 +16,7 @@ const renderStore = (rootStore: RootStore) => {
   );
 };
 
-describe("<Todolist />", () => {
+describe("<UserList />", () => {
   let rootStore: RootStore;
 
   beforeEach(() => {
@@ -24,6 +24,8 @@ describe("<Todolist />", () => {
   });
 
   test("it renders without error", () => {
+    rootStore.dataStore.userStore.addUser("Test User");
+
     expect(renderStore(rootStore)).toBeTruthy();
   });
 
@@ -35,8 +37,27 @@ describe("<Todolist />", () => {
   });
 
   test("Add todo input is rendered", async () => {
+    rootStore.dataStore.userStore.addUser("Test User");
     renderStore(rootStore);
 
     expect(screen.queryByText("Todo Title:")).toBeInTheDocument();
+  });
+
+  test("Add todo input is rendered", async () => {
+    rootStore.dataStore.userStore.addUser("Test User");
+
+    renderStore(rootStore);
+
+    expect(screen.queryByText("Todo Title:")).toBeInTheDocument();
+  });
+
+  test("new todo entered into input is rendered", async () => {
+    rootStore.dataStore.userStore.addUser("Test User");
+    renderStore(rootStore);
+
+    userEvent.type(screen.getByTestId("add-input"), "User typed something");
+
+    fireEvent.click(screen.getByText("Add Todo"));
+    expect(screen.getByText("User typed something")).toBeInTheDocument;
   });
 });

@@ -4,7 +4,6 @@ import "@testing-library/jest-dom/extend-expect";
 import { StoreContext } from "../../stores/helpers/storeContext";
 import UserComponent from "./UserComponent";
 import { User } from "../../stores/data/users/user";
-// import { UserStore } from "../../stores/data/users/userStore";
 import { RootStore } from "../../stores/rootStore";
 
 const renderStore = (rootStore: RootStore, user: User) => {
@@ -15,7 +14,7 @@ const renderStore = (rootStore: RootStore, user: User) => {
   );
 };
 
-describe("<Todo />", () => {
+describe("<UserComponent />", () => {
   let user: User;
   let rootStore: RootStore;
   beforeEach(() => {
