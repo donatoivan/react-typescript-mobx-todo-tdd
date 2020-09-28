@@ -10,7 +10,7 @@ const TodoList: React.FunctionComponent = () => {
 
   return useObserver(() => {
     return (
-      <div>
+      <div data-testid="todo-list">
         <div>
           <h1>Incomplete Todos ({todoStore.incompleteTodos.length})</h1>
           {todoStore.incompleteTodos.map((todo) => {

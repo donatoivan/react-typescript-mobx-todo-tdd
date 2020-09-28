@@ -1,11 +1,17 @@
 import React from "react";
-import { render, cleanup, fireEvent } from "@testing-library/react";
+import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import App from "./App";
 import { StoreContext } from "../stores/helpers/storeContext";
 import { RootStore } from "../stores/rootStore";
 
-afterEach(cleanup);
+const renderStore = (rootStore: RootStore) => {
+  return render(
+    <StoreContext.Provider value={rootStore}>
+      <App />
+    </StoreContext.Provider>
+  );
+};
 
 describe("<App />", () => {
   let rootStore: RootStore;
@@ -13,24 +19,16 @@ describe("<App />", () => {
     rootStore = new RootStore();
   });
   test("component renders incomplete Todo list", () => {
-    const { getByText } = render(
-      <StoreContext.Provider value={rootStore}>
-        <App />
-      </StoreContext.Provider>
-    );
-
-    expect(getByText("Incomplete Todos (0)")).toBeInTheDocument();
+    renderStore(rootStore);
+    expect(screen.getByText("Incomplete Todos (0)")).toBeInTheDocument();
   });
 
   test("component renders Users", () => {
-    const { getByText } = render(
-      <StoreContext.Provider value={rootStore}>
-        <App />
-      </StoreContext.Provider>
-    );
+    rootStore.dataStore.userStore.addUser("Test User");
+    renderStore(rootStore);
 
-    fireEvent.click(getByText("Users List"));
+    fireEvent.click(screen.getByText("Users List"));
 
-    expect(getByText("Users")).toBeInTheDocument();
+    expect(screen.getByText("Test User")).toBeInTheDocument();
   });
 });
