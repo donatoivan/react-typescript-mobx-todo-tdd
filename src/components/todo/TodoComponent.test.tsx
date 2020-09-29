@@ -1,7 +1,6 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import "@testing-library/jest-dom/extend-expect";
 import { StoreContext } from "../../stores/helpers/storeContext";
 import TodoComponent from "./TodoComponent";
 import { Todo } from "../../stores/data/todos/todo";

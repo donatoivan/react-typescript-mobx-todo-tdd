@@ -1,6 +1,5 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
 import { StoreContext } from "../../stores/helpers/storeContext";
 import UserComponent from "./UserComponent";
 import { User } from "../../stores/data/users/user";

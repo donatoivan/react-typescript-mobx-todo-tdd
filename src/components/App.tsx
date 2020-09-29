@@ -1,45 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
-import { useStore } from "../stores/helpers/useStore";
-import { Views } from "../stores/ui/globalView";
-
+import { MainContainer } from "./styles/index";
+import { ButtonToggle } from "./styles/index";
+import { ButtonGroup } from "./styles/index";
 import TodoList from "./todoList/TodoList";
 import UserList from "./userList/UserList";
 
 const App: React.FunctionComponent = () => {
-  const {
-    uiStore: { globalView },
-  } = useStore();
-
   const getViews = (): JSX.Element | undefined => {
-    if (globalView.currentView === Views.Todos) {
+    if (active === "Todos List") {
       return <TodoList />;
-    } else if (globalView.currentView === Views.Users) {
+    } else if (active === "Users List") {
       return <UserList />;
     }
     return;
   };
 
+  const types = ["Todos List", "Users List"];
+  const [active, setActive] = useState(types[0]);
+
   return (
-    <>
-      <button
-        type="button"
-        onClick={() => {
-          globalView.setView(Views.Todos);
-        }}
-      >
-        Todos List
-      </button>
-      <button
-        type="button"
-        onClick={() => {
-          globalView.setView(Views.Users);
-        }}
-      >
-        Users List
-      </button>
-      <div>{getViews()}</div>
-    </>
+    <MainContainer>
+      <ButtonGroup>
+        {types.map((type) => (
+          <ButtonToggle
+            key={type}
+            active={active === type}
+            onClick={() => setActive(type)}
+          >
+            {type}
+          </ButtonToggle>
+        ))}
+      </ButtonGroup>
+      {getViews()}
+    </MainContainer>
   );
 };
 

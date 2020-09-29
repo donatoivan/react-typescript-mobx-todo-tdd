@@ -1,11 +1,8 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
 import { RootStore } from "../../stores/rootStore";
 import { StoreContext } from "../../stores/helpers/storeContext";
-import "@testing-library/jest-dom/extend-expect";
-
 import UserList from "./UserList";
 
 const renderStore = (rootStore: RootStore) => {

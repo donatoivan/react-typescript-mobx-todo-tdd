@@ -1,15 +1,18 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
 import App from "./App";
 import { StoreContext } from "../stores/helpers/storeContext";
 import { RootStore } from "../stores/rootStore";
+import { ThemeProvider } from "styled-components";
+import { myTheme } from "../styles/theme";
 
 const renderStore = (rootStore: RootStore) => {
   return render(
     <StoreContext.Provider value={rootStore}>
-      <App />
-    </StoreContext.Provider>
+      <ThemeProvider theme={myTheme}>
+        <App />
+      </ThemeProvider>
+    </StoreContext.Provider>,
   );
 };
 

@@ -4,6 +4,9 @@ import App from "./components/App";
 
 import { StoreProvider } from "./stores/helpers/storeContext";
 import { createStore } from "./stores/helpers/createStores";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles } from "./styles/index";
+import { myTheme } from "./styles/index";
 
 const store = createStore();
 
@@ -15,10 +18,12 @@ store.dataStore.userStore.addUser("User 1");
 store.dataStore.userStore.addUser("User 2");
 ReactDOM.render(
   <StoreProvider value={store}>
-    <App />
+    <ThemeProvider theme={myTheme}>
+      <GlobalStyles />
+      <App />
+    </ThemeProvider>
   </StoreProvider>,
-
-  document.getElementById("app")
+  document.getElementById("app"),
 );
 
 /* eslint @typescript-eslint/no-unsafe-member-access: "off",
