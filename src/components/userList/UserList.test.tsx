@@ -4,12 +4,16 @@ import userEvent from "@testing-library/user-event";
 import { RootStore } from "../../stores/rootStore";
 import { StoreContext } from "../../stores/helpers/storeContext";
 import UserList from "./UserList";
+import { ThemeProvider } from "styled-components";
+import { myTheme } from "../../styles/theme";
 
 const renderStore = (rootStore: RootStore) => {
   return render(
     <StoreContext.Provider value={rootStore}>
-      <UserList />
-    </StoreContext.Provider>
+      <ThemeProvider theme={myTheme}>
+        <UserList />
+      </ThemeProvider>
+    </StoreContext.Provider>,
   );
 };
 

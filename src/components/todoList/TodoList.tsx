@@ -2,6 +2,7 @@ import React from "react";
 import { useStore } from "../../stores/helpers/useStore";
 import { useObserver } from "mobx-react-lite";
 import TodoComponent from "../todo/TodoComponent";
+import { Title } from "../styles/index";
 
 const TodoList: React.FunctionComponent = () => {
   const {
@@ -12,15 +13,21 @@ const TodoList: React.FunctionComponent = () => {
     return (
       <div data-testid="todo-list">
         <div>
-          <h1>Incomplete Todos ({todoStore.incompleteTodos.length})</h1>
+          <Title>Incomplete Todos ({todoStore.incompleteTodos.length})</Title>
           {todoStore.incompleteTodos.map((todo) => {
-            return <TodoComponent todo={todo} key={todo.id} />;
+            return <TodoComponent todo={todo} key={todo.id} completed={true} />;
           })}
         </div>
         <div>
-          <h1>Complete Todos ({todoStore.completedTodos.length})</h1>
+          <Title>
+            Complete Todos ({todoStore.completedTodos.length})
+          </Title>
           {todoStore.completedTodos.map((todo) => {
-            return <TodoComponent todo={todo} key={todo.id} />;
+            return <TodoComponent
+              todo={todo}
+              key={todo.id}
+              completed={false}
+            />;
           })}
         </div>
       </div>

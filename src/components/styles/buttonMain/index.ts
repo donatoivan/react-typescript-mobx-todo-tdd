@@ -4,7 +4,7 @@ interface Props {
   active: boolean;
 }
 
-export const Button = styled.button.attrs((props) => ({
+export const ButtonMain = styled.button.attrs((props) => ({
   type: props.type || "button",
 }))`${({ theme }) =>
   css`
@@ -17,7 +17,7 @@ export const Button = styled.button.attrs((props) => ({
     `}
 `;
 
-export const ButtonToggle = styled(Button)<Props>`
+export const ButtonToggle = styled(ButtonMain)<Props>`
     background-color: white;
   ${({ active, theme }) =>
   active &&

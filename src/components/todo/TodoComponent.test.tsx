@@ -6,12 +6,16 @@ import TodoComponent from "./TodoComponent";
 import { Todo } from "../../stores/data/todos/todo";
 import { TodoStore } from "../../stores/data/todos/todoStore";
 import { RootStore } from "../../stores/rootStore";
+import { ThemeProvider } from "styled-components";
+import { myTheme } from "../../styles/theme";
 
 const renderStore = (rootStore: RootStore, todo: Todo) => {
   return render(
     <StoreContext.Provider value={rootStore}>
-      <TodoComponent todo={todo} key={1} />
-    </StoreContext.Provider>
+      <ThemeProvider theme={myTheme}>
+        <TodoComponent todo={todo} key={1} completed={true} />
+      </ThemeProvider>
+    </StoreContext.Provider>,
   );
 };
 
@@ -35,30 +39,26 @@ describe("<Todo />", () => {
   test("edit, remove and toggles buttons are rendered", () => {
     renderStore(rootStore, todo);
 
-    const editButton: HTMLElement = screen.getByText("Edit");
-    const removeButton: HTMLElement = screen.getByText("Remove");
-    const toggleButton: HTMLElement = screen.getByText("Toggle Completed");
-
-    expect(editButton.textContent).toEqual("Edit");
-    expect(removeButton.textContent).toEqual("Remove");
-    expect(toggleButton.textContent).toEqual("Toggle Completed");
+    expect(screen.getByText("Edit").textContent).toEqual("Edit");
+    expect(screen.getByText("Remove").textContent).toEqual("Remove");
+    expect(screen.getByText("Complete").textContent).toEqual("Complete");
   });
 
   test("todo completed attribute is rendered", () => {
     renderStore(rootStore, todo);
 
     expect(screen.getByTestId("completed")).toHaveTextContent(
-      "Completed: false"
+      "Completed: false",
     );
   });
 
   test("todo completed attribute is toggled from false to true", () => {
     renderStore(rootStore, todo);
 
-    fireEvent.click(screen.getByText("Toggle Completed"));
+    fireEvent.click(screen.getByText("Complete"));
 
     expect(screen.getByTestId("completed")).toHaveTextContent(
-      "Completed: true"
+      "Completed: true",
     );
   });
 
@@ -87,7 +87,7 @@ describe("<Todo />", () => {
 
     userEvent.type(screen.getByTestId("edit-input"), "User typed something");
     expect(screen.getByTestId("edit-input")).toHaveValue(
-      "User typed something"
+      "User typed something",
     );
   });
 
@@ -99,7 +99,7 @@ describe("<Todo />", () => {
     fireEvent.click(screen.getByText("Save"));
 
     expect(screen.getByTestId("todo-title")).toHaveTextContent(
-      "User typed something"
+      "User typed something",
     );
   });
 });

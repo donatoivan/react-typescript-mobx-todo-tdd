@@ -6,6 +6,7 @@ const myTheme: DefaultTheme = {
     orangeyPink: "#FFB09C",
     grey: "#E6E6E6",
     white: "white",
+    titleGrey: "#A6A6A6",
   },
 };
 

@@ -4,12 +4,16 @@ import { StoreContext } from "../../stores/helpers/storeContext";
 import UserComponent from "./UserComponent";
 import { User } from "../../stores/data/users/user";
 import { RootStore } from "../../stores/rootStore";
+import { ThemeProvider } from "styled-components";
+import { myTheme } from "../../styles/theme";
 
 const renderStore = (rootStore: RootStore, user: User) => {
   return render(
     <StoreContext.Provider value={rootStore}>
-      <UserComponent user={user} key={1} />
-    </StoreContext.Provider>
+      <ThemeProvider theme={myTheme}>
+        <UserComponent user={user} key={1} />
+      </ThemeProvider>
+    </StoreContext.Provider>,
   );
 };
 

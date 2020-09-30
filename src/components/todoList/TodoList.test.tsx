@@ -3,12 +3,16 @@ import { render, fireEvent } from "@testing-library/react";
 import { RootStore } from "../../stores/rootStore";
 import { StoreContext } from "../../stores/helpers/storeContext";
 import TodoList from "./TodoList";
+import { ThemeProvider } from "styled-components";
+import { myTheme } from "../../styles/theme";
 
 const renderStore = (rootStore: RootStore) => {
   return render(
     <StoreContext.Provider value={rootStore}>
-      <TodoList />
-    </StoreContext.Provider>
+      <ThemeProvider theme={myTheme}>
+        <TodoList />
+      </ThemeProvider>
+    </StoreContext.Provider>,
   );
 };
 

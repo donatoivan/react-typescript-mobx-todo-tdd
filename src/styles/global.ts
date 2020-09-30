@@ -5,6 +5,7 @@ ${({ theme }) =>
   css`
   html {
     height: 100%;
+    font-family: 'Roboto', sans-serif;
 
     body {
       display: flex;
