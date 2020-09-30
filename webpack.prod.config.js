@@ -1,7 +1,6 @@
 const { resolve } = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const tsImportPluginFactory = require("ts-import-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
@@ -25,15 +24,6 @@ module.exports = {
             loader: "ts-loader",
             options: {
               transpileOnly: true,
-              getCustomTransformers: () => ({
-                before: [
-                  tsImportPluginFactory({
-                    libraryName: "antd",
-                    libraryDirectory: "es",
-                    style: "css",
-                  }),
-                ],
-              }),
               compilerOptions: {
                 module: "es2015",
               },
@@ -46,16 +36,16 @@ module.exports = {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
-      { test: /\.png$/, loader: "url-loader?limit=100000" },
-      { test: /\.jpg$/, loader: "file-loader" },
-      {
-        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url-loader?limit=10000&mimetype=application/font-woff",
-      },
-      {
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: "url-loader?limit=10000&mimetype=application/octet-stream",
-      },
+      // { test: /\.png$/, loader: "url-loader?limit=100000" },
+      // { test: /\.jpg$/, loader: "file-loader" },
+      // {
+      //   test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+      //   loader: "url-loader?limit=10000&mimetype=application/font-woff",
+      // },
+      // {
+      //   test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+      //   loader: "url-loader?limit=10000&mimetype=application/octet-stream",
+      // },
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: "file-loader" },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
