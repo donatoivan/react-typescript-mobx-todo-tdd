@@ -20,7 +20,17 @@ export class User {
   @computed
   get userTodos(): Todo[] {
     return this.rootStore.dataStore.todoStore.list.filter(
-      (todo) => todo.userId === this.userId
+      (todo) => todo.userId === this.userId,
     );
+  }
+
+  @computed
+  get incompleteTodos(): Todo[] {
+    return this.userTodos.filter((todo) => todo.isCompleted === false);
+  }
+
+  @computed
+  get completedTodos(): Todo[] {
+    return this.userTodos.filter((todo) => todo.isCompleted === true);
   }
 }

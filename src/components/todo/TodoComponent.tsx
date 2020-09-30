@@ -15,27 +15,12 @@ import {
 
 interface Props {
   todo: Todo;
-  completed: boolean;
+  completed?: boolean;
 }
 
 const TodoComponent: React.FunctionComponent<Props> = ({ todo, completed }) => {
   const [editMode, setEditMode] = useState(false);
   const [text, setText] = useState("");
-
-  // const completedToggle = () => {
-  //   /* eslint-disable no-console*/
-  //   console.log("clicked");
-  //   setCompleted("Test");
-  //   /* eslint-disable no-console*/
-  //   console.log(completed);
-
-  //   // if (completed === "Incomplete") {
-  //   //   setCompleted("Completed");
-  //   //   console.log(completed);
-  //   // } else {
-  //   //   setCompleted("Incomplete");
-  //   // }
-  // };
 
   return useObserver(() => {
     return (

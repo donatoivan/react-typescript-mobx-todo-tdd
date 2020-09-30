@@ -34,22 +34,15 @@ describe("<UserList />", () => {
     rootStore.dataStore.userStore.addUser("Test User");
     renderStore(rootStore);
 
-    expect(screen.queryByTestId("user-name")).toBeInTheDocument();
+    expect(screen.queryByText("Test User")).toBeInTheDocument();
   });
 
-  test("Add todo input is rendered", async () => {
-    rootStore.dataStore.userStore.addUser("Test User");
-    renderStore(rootStore);
-
-    expect(screen.queryByText("Todo Title:")).toBeInTheDocument();
-  });
-
-  test("Add todo input is rendered", async () => {
+  test("Add todo button is rendered", async () => {
     rootStore.dataStore.userStore.addUser("Test User");
 
     renderStore(rootStore);
 
-    expect(screen.queryByText("Todo Title:")).toBeInTheDocument();
+    expect(screen.queryByText("Add Todo")).toBeInTheDocument();
   });
 
   test("new todo entered into input is rendered", async () => {

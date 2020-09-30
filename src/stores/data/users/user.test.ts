@@ -20,4 +20,17 @@ describe("User", () => {
       expect(user.userTodos.length).toEqual(1);
     }
   });
+
+  test("get completed user todos", () => {
+    testRootStore.dataStore.todoStore.addTodo("Test", user.userId);
+    testRootStore.dataStore.todoStore.list[0].toggleIsCompleted();
+
+    expect(user.completedTodos.length).toEqual(1);
+  });
+
+  test("get incomplete user todos", () => {
+    testRootStore.dataStore.todoStore.addTodo("Test", user.userId);
+
+    expect(user.incompleteTodos.length).toEqual(1);
+  });
 });

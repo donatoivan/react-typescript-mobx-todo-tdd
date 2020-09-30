@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 
 interface Props {
   active: boolean;
+  size?: string;
 }
 
 export const ButtonMain = styled.button.attrs((props) => ({
@@ -19,6 +20,7 @@ export const ButtonMain = styled.button.attrs((props) => ({
 
 export const ButtonToggle = styled(ButtonMain)<Props>`
     background-color: white;
+    font-size: ${(props) => props.size || "28px"};
   ${({ active, theme }) =>
   active &&
   `

@@ -10,3 +10,5 @@ export * from "./completedParagraph";
 export * from "./todoButton";
 export * from "./inputContainer";
 export * from "./input";
+export * from "./todoListContainer";
+export * from "./addTodoContainer";

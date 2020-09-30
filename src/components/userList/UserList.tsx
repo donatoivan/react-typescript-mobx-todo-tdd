@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { useStore } from "../../stores/helpers/useStore";
-import UserComponent from "../user/UserComponent";
+import TodoComponent from "../todo/TodoComponent";
+import {
+  ButtonGroup,
+  ButtonToggle,
+  Input,
+  InputContainer,
+  AddTodoContainer,
+  TodoListContainer,
+  Title,
+  TodoButton,
+} from "../styles/index";
 import { useObserver } from "mobx-react-lite";
 
 const UserList = (): JSX.Element => {
@@ -9,37 +19,66 @@ const UserList = (): JSX.Element => {
   } = useStore();
 
   const [text, setText] = useState("");
-  const [currentUser, setCurrentUser] = useState(userStore.list[0]);
+  const [active, setActive] = useState(userStore.list[0]);
 
   const handleSubmit = (e: React.MouseEvent) => {
     e.preventDefault();
-    todoStore.addTodo(text, currentUser.userId);
+    todoStore.addTodo(text, active.userId);
   };
 
   return useObserver(() => {
     return (
       <div>
-        {userStore.list.map((user) => {
-          return (
-            <div onClick={() => setCurrentUser(user)} key={user.userId}>
-              <UserComponent user={user} />
-            </div>
-          );
-        })}
-        <div>
-          <label htmlFor="add-todo">Todo Title: </label>
-          <input
-            data-testid="add-input"
-            type="text"
-            name="add-todo"
-            id="add-todo"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-          />
-          <button type="submit" onClick={(e) => handleSubmit(e)}>
+        <ButtonGroup>
+          {userStore.list.map((user) => (
+            <ButtonToggle
+              size="16px"
+              key={user.userId}
+              active={active === user}
+              onClick={() => {
+                setActive(user);
+              }}
+            >
+              {user.name}
+            </ButtonToggle>
+          ))}
+        </ButtonGroup>
+        <TodoListContainer data-testid="todo-list">
+          <div>
+            <Title>Incomplete Todos ({active.incompleteTodos.length})</Title>
+            {active.incompleteTodos.map((todo) => {
+              return <TodoComponent
+                todo={todo}
+                key={todo.id}
+                completed={true}
+              />;
+            })}
+          </div>
+          <div>
+            <Title>
+              Complete Todos ({active.completedTodos.length})
+            </Title>
+            {active.completedTodos.map((todo) => {
+              return <TodoComponent
+                todo={todo}
+                key={todo.id}
+                completed={false}
+              />;
+            })}
+          </div>
+        </TodoListContainer>
+        <AddTodoContainer>
+          <InputContainer>
+            <Input
+              data-testid="add-input"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+          </InputContainer>
+          <TodoButton type="button" onClick={(e) => handleSubmit(e)}>
             Add Todo
-          </button>
-        </div>
+          </TodoButton>
+        </AddTodoContainer>
       </div>
     );
   });

@@ -19,7 +19,11 @@ const UserComponent: React.FunctionComponent<Props> = ({ user }) => {
         <h1 data-testid="user-name">{user.name}</h1>
         <div data-testid="user-todos">
           {userStore.getUser(user.userId).userTodos.map((todo) => {
-            return <TodoComponent todo={todo} key={todo.id} />;
+            return <TodoComponent
+              todo={todo}
+              key={todo.id}
+              completed={false}
+            />;
           })}
         </div>
       </div>

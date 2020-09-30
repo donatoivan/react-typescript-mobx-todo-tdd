@@ -2,7 +2,7 @@ import React from "react";
 import { useStore } from "../../stores/helpers/useStore";
 import { useObserver } from "mobx-react-lite";
 import TodoComponent from "../todo/TodoComponent";
-import { Title } from "../styles/index";
+import { Title, TodoListContainer } from "../styles/index";
 
 const TodoList: React.FunctionComponent = () => {
   const {
@@ -11,7 +11,7 @@ const TodoList: React.FunctionComponent = () => {
 
   return useObserver(() => {
     return (
-      <div data-testid="todo-list">
+      <TodoListContainer data-testid="todo-list">
         <div>
           <Title>Incomplete Todos ({todoStore.incompleteTodos.length})</Title>
           {todoStore.incompleteTodos.map((todo) => {
@@ -30,7 +30,7 @@ const TodoList: React.FunctionComponent = () => {
             />;
           })}
         </div>
-      </div>
+      </TodoListContainer>
     );
   });
 };

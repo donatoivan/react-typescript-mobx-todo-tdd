@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import App from "./components/App";
-
 import { StoreProvider } from "./stores/helpers/storeContext";
 import { createStore } from "./stores/helpers/createStores";
 import { ThemeProvider } from "styled-components";
@@ -10,12 +9,15 @@ import { myTheme } from "./styles/index";
 
 const store = createStore();
 
-store.dataStore.todoStore.addTodo("hey", 1);
-store.dataStore.todoStore.addTodo("ho", 1);
-store.dataStore.todoStore.addTodo("hee", 1);
-store.dataStore.todoStore.addTodo("hee2", 2);
+store.dataStore.todoStore.addTodo("Buy milk", 1);
+store.dataStore.todoStore.addTodo("Study for my test", 1);
+store.dataStore.todoStore.addTodo("Drop off kids", 1);
+store.dataStore.todoStore.addTodo("Cook for tonight", 2);
+store.dataStore.todoStore.addTodo("Pay Bills", 2);
+store.dataStore.todoStore.addTodo("Don't forget to smile", 2);
 store.dataStore.userStore.addUser("User 1");
 store.dataStore.userStore.addUser("User 2");
+
 ReactDOM.render(
   <StoreProvider value={store}>
     <ThemeProvider theme={myTheme}>
@@ -23,7 +25,7 @@ ReactDOM.render(
       <App />
     </ThemeProvider>
   </StoreProvider>,
-  document.getElementById("app"),
+  document.getElementById("app")
 );
 
 /* eslint @typescript-eslint/no-unsafe-member-access: "off",

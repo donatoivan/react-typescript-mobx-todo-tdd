@@ -4,8 +4,10 @@ export default createGlobalStyle`
 ${({ theme }) =>
   css`
   html {
-    height: 100%;
+    /* height: 100%; */
     font-family: 'Roboto', sans-serif;
+    background-color: ${theme.colors.background};
+
 
     body {
       display: flex;
@@ -21,7 +23,6 @@ ${({ theme }) =>
         height: 100%;
         display: flex;
         justify-content: center;
-        background-color: ${theme.colors.background};
         padding: 100px;
       }
     }
