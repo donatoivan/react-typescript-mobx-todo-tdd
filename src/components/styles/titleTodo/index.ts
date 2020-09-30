@@ -10,6 +10,7 @@ export const TitleTodo = styled.h2`
     align-items: flex-end;
     border-bottom: 1px solid ${props.theme.colors.background};
     width: 100%;
-    color: ${props.theme.colors.titleGrey};     
+    color: ${props.theme.colors.titleGrey};
+    word-wrap: break-word; 
     `}
 `;

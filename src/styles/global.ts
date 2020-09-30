@@ -16,6 +16,7 @@ ${({ theme }) =>
         outline: none;
       }
 
+
       #app {
         height: 100%;
         display: flex;

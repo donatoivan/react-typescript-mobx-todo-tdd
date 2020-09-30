@@ -9,6 +9,8 @@ import {
   TitleTodo,
   CompletedParagraph,
   TodoButton,
+  Input,
+  InputContainer,
 } from "../styles/index";
 
 interface Props {
@@ -40,13 +42,13 @@ const TodoComponent: React.FunctionComponent<Props> = ({ todo, completed }) => {
       <ContentCard data-testid="todo" key={todo.id}>
         {editMode
           ? (
-            <div>
-              <input
+            <InputContainer>
+              <Input
                 data-testid="edit-input"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
-            </div>
+            </InputContainer>
           )
           : (
             <TitleContainer>
