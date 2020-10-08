@@ -47,23 +47,17 @@ const UserList = (): JSX.Element => {
           <div>
             <Title>Incomplete Todos ({active.incompleteTodos.length})</Title>
             {active.incompleteTodos.map((todo) => {
-              return <TodoComponent
-                todo={todo}
-                key={todo.id}
-                completed={true}
-              />;
+              return (
+                <TodoComponent todo={todo} key={todo.id} completed={true} />
+              );
             })}
           </div>
           <div>
-            <Title>
-              Complete Todos ({active.completedTodos.length})
-            </Title>
+            <Title>Complete Todos ({active.completedTodos.length})</Title>
             {active.completedTodos.map((todo) => {
-              return <TodoComponent
-                todo={todo}
-                key={todo.id}
-                completed={false}
-              />;
+              return (
+                <TodoComponent todo={todo} key={todo.id} completed={false} />
+              );
             })}
           </div>
         </TodoListContainer>
@@ -75,7 +69,13 @@ const UserList = (): JSX.Element => {
               onChange={(e) => setText(e.target.value)}
             />
           </InputContainer>
-          <TodoButton type="button" onClick={(e) => handleSubmit(e)}>
+          <TodoButton
+            type="button"
+            onClick={(e) => {
+              handleSubmit(e);
+              setText("");
+            }}
+          >
             Add Todo
           </TodoButton>
         </AddTodoContainer>

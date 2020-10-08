@@ -25,45 +25,40 @@ const TodoComponent: React.FunctionComponent<Props> = ({ todo, completed }) => {
   return useObserver(() => {
     return (
       <ContentCard data-testid="todo" key={todo.id}>
-        {editMode
-          ? (
-            <InputContainer>
-              <Input
-                data-testid="edit-input"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-              />
-            </InputContainer>
-          )
-          : (
-            <TitleContainer>
-              <TitleTodo data-testid="todo-title">
-                {todo.title}
-              </TitleTodo>
-            </TitleContainer>
-          )}
+        {editMode ? (
+          <InputContainer>
+            <Input
+              data-testid="edit-input"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+          </InputContainer>
+        ) : (
+          <TitleContainer>
+            <TitleTodo data-testid="todo-title">{todo.title}</TitleTodo>
+          </TitleContainer>
+        )}
         <TodoButtonGroup>
           <CompletedParagraph data-testid="completed">
             Completed: {todo.isCompleted.toString()}
           </CompletedParagraph>
           <ButtonGroup>
-            {editMode
-              ? (
-                <TodoButton
-                  type="button"
-                  onClick={() => {
-                    todo.updateTitle(text);
-                    setEditMode(false);
-                  }}
-                >
-                  Save
-                </TodoButton>
-              )
-              : (
-                <TodoButton type="button" onClick={() => setEditMode(true)}>
-                  Edit
-                </TodoButton>
-              )}
+            {editMode ? (
+              <TodoButton
+                type="button"
+                onClick={() => {
+                  todo.updateTitle(text);
+                  setEditMode(false);
+                  setText("");
+                }}
+              >
+                Save
+              </TodoButton>
+            ) : (
+              <TodoButton type="button" onClick={() => setEditMode(true)}>
+                Edit
+              </TodoButton>
+            )}
             <TodoButton
               type="button"
               onClick={() => {
